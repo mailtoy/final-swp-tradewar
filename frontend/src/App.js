@@ -16,7 +16,8 @@ class App extends Component {
     super()
     this.state = {
       message: [],
-      endpoint: "104.197.98.78" // เชื่อมต่อไปยัง url ของ realtime server
+      // endpoint: "104.197.98.78",
+      endpoint: "localhost:4000"
     }
   }
 
@@ -24,9 +25,12 @@ class App extends Component {
     const { endpoint, message } = this.state
     const temp = message
     const socket = socketIOClient(endpoint)
-    socket.on('new-message', (messageNew) => {
-      temp.push(messageNew)
-      this.setState({ message: temp })
+    // socket.on('new-message', (messageNew) => {
+    //   temp.push(messageNew)
+    //   this.setState({ message: temp })
+    // })
+    socket.on('messages', messages => {
+      this.setState({ message: messages })
     })
   }
 
