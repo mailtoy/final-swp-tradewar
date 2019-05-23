@@ -26,8 +26,8 @@ io.on('connection', client => {
   })
 })
 
-const stream = client.stream('statuses/filter', { track: 'tradewar' })
+const stream = client.stream('statuses/filter', { track: '#tradewar' })
 stream.on('data', function (event) {
   if (event)
-    io.sockets.emit('new-message', event.text)
+    io.sockets.emit('new-message', event)
 })
